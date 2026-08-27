@@ -230,12 +230,12 @@ val SampleDiscordServices = listOf(
     id = "dc-server",
     title = "Discord Server Setup",
     category = "Discord",
-    price = "₹100 / ₹500",
+    price = "₹500 / ₹1000",
     subtitle = "Standard / Premium",
     description = "Professional Discord server setup with organized channels, roles, permissions and community structure tailored for gaming.",
     badge = "COMMUNITY",
     features = listOf("Complete Role Hierarchy", "Permissions Audit & Security", "Welcome & Log Systems", "Aesthetic Channels & Emojis"),
-    options = listOf("Premium" to "₹100", "Standard" to "₹500")
+    options = listOf("Standard" to "₹500", "Premium" to "₹1000")
   )
 )
 

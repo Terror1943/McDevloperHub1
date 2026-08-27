@@ -6,13 +6,20 @@
   <title>MCDeveloperHub | Professional Website, Minecraft & Discord Development</title>
   <meta name="description" content="MCDeveloperHub - Premium Minecraft server systems, custom web development, professional Discord servers, and Discord bots for gaming communities and creators.">
   <meta name="theme-color" content="#ff2247">
+  
+  <!-- Google Fonts: Space Grotesk & Orbitron & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <!-- 1. LOADING SCREEN -->
   <div id="loading-screen" class="loading-screen" aria-hidden="false">
     <div class="loader-content">
@@ -149,7 +156,7 @@
             </a>
           </div>
 
-          <!-- Quick Stats -->
+          <!-- Quick Stats / Highlights -->
           <div class="hero-stats reveal-fade">
             <div class="stat-card">
               <div class="stat-num">100%</div>
@@ -214,7 +221,7 @@
       </div>
     </section>
 
-    <!-- 4. SERVICE CATEGORIES -->
+    <!-- 4. SERVICE CATEGORIES (Large Highlights) -->
     <section class="section-categories" id="service-categories">
       <div class="container">
         <div class="section-header reveal-fade">
@@ -291,7 +298,7 @@
         </div>
 
         <div class="services-grid" id="website-services-container">
-          <!-- Populated by JS -->
+          <!-- Dynamically populated from JS SERVICE PRICES configuration -->
         </div>
       </div>
     </section>
@@ -306,7 +313,7 @@
         </div>
 
         <div class="services-grid" id="minecraft-services-container">
-          <!-- Populated by JS -->
+          <!-- Dynamically populated from JS SERVICE PRICES configuration -->
         </div>
       </div>
     </section>
@@ -321,7 +328,7 @@
         </div>
 
         <div class="services-grid" id="discord-services-container">
-          <!-- Populated by JS -->
+          <!-- Dynamically populated from JS SERVICE PRICES configuration -->
         </div>
       </div>
     </section>
@@ -336,30 +343,42 @@
         </div>
 
         <div class="why-us-grid">
+          <!-- Card 1 -->
           <div class="why-card reveal-up">
             <div class="why-card-glow"></div>
-            <div class="why-icon-box"><i class="fa-solid fa-bolt-lightning"></i></div>
+            <div class="why-icon-box">
+              <i class="fa-solid fa-bolt-lightning"></i>
+            </div>
             <h3 class="why-title">⚡ Fast Development</h3>
             <p class="why-desc">We prioritize quick turnaround times with rigorous QA testing so your server or website goes live without delays.</p>
           </div>
 
+          <!-- Card 2 -->
           <div class="why-card reveal-up" style="animation-delay: 0.1s;">
             <div class="why-card-glow"></div>
-            <div class="why-icon-box"><i class="fa-solid fa-rocket"></i></div>
+            <div class="why-icon-box">
+              <i class="fa-solid fa-rocket"></i>
+            </div>
             <h3 class="why-title">🚀 Modern Technology</h3>
             <p class="why-desc">Using cutting-edge software stacks, lightweight architectures, and optimized server configurations for peak performance.</p>
           </div>
 
+          <!-- Card 3 -->
           <div class="why-card reveal-up" style="animation-delay: 0.2s;">
             <div class="why-card-glow"></div>
-            <div class="why-icon-box"><i class="fa-solid fa-palette"></i></div>
+            <div class="why-icon-box">
+              <i class="fa-solid fa-palette"></i>
+            </div>
             <h3 class="why-title">🎨 Premium Design</h3>
             <p class="why-desc">Tailored high-impact visual aesthetics, intuitive user interfaces, and custom branding that make your community stand out.</p>
           </div>
 
+          <!-- Card 4 -->
           <div class="why-card reveal-up" style="animation-delay: 0.3s;">
             <div class="why-card-glow"></div>
-            <div class="why-icon-box"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+            <div class="why-icon-box">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
             <h3 class="why-title">🛠️ Custom Solutions</h3>
             <p class="why-desc">Every gaming community has unique requirements. We craft personalized setups tailored exactly to your vision.</p>
           </div>
@@ -367,7 +386,7 @@
       </div>
     </section>
 
-    <!-- 9. CONTACT / ORDER SECTION -->
+    <!-- 9. CONTACT / ORDER SECTION (Large CTA) -->
     <section class="section-contact" id="contact">
       <div class="container">
         <div class="cta-banner reveal-scale">
@@ -390,6 +409,7 @@
               </a>
             </div>
 
+            <!-- Direct Contact Info Strip -->
             <div class="cta-direct-info">
               <div class="info-item">
                 <i class="fa-solid fa-at"></i>
@@ -530,11 +550,42 @@
     </div>
   </footer>
 
+  <!-- Floating Background Music Controller -->
+  <div id="music-player-widget" class="music-widget" aria-label="Background Music Controller">
+    <div class="music-widget-inner">
+      <!-- Main Play/Pause Button -->
+      <button id="music-play-btn" class="music-btn music-play-btn" aria-label="Play or Pause background music" title="Play / Pause Music">
+        <i class="fa-solid fa-play" id="music-play-icon"></i>
+      </button>
+
+      <!-- Animated Equalizer Wave -->
+      <div class="music-equalizer" id="music-equalizer" title="Audio Equalizer">
+        <span class="eq-bar bar-1"></span>
+        <span class="eq-bar bar-2"></span>
+        <span class="eq-bar bar-3"></span>
+        <span class="eq-bar bar-4"></span>
+      </div>
+
+      <!-- Music Info & Volume Control -->
+      <div class="music-details">
+        <span class="music-title">AMBIENT SYNTH</span>
+        <div class="music-volume-wrap">
+          <button id="music-mute-btn" class="music-mute-btn" aria-label="Mute or Unmute Music" title="Mute / Unmute">
+            <i class="fa-solid fa-volume-high" id="music-volume-icon"></i>
+          </button>
+          <input type="range" id="music-volume-slider" class="music-volume-slider" min="0" max="1" step="0.01" value="0.15" aria-label="Music Volume" title="Volume Slider">
+          <span id="music-volume-text" class="music-volume-percent">15%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Floating Scroll To Top Button -->
   <button id="back-to-top" class="back-to-top" aria-label="Scroll to top">
     <i class="fa-solid fa-arrow-up"></i>
   </button>
 
+  <!-- Main JavaScript File -->
   <script src="script.js"></script>
 </body>
 </html>

@@ -5,6 +5,13 @@
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ⚡ DISCORD PRICING CONFIGURATION (EASILY EDITABLE)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+const DISCORD_BOT_PRICE = "₹1000";
+const DISCORD_STANDARD_PRICE = "₹500";
+const DISCORD_PREMIUM_PRICE = "₹1000";
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 💰 SERVICE PRICES (EDIT YOUR SERVICES & PRICING HERE)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 const SERVICE_CONFIG = {
@@ -119,7 +126,7 @@ const SERVICE_CONFIG = {
       name: "Discord Bot Development",
       category: "Discord",
       icon: "fa-solid fa-robot",
-      singlePrice: "₹1000",
+      singlePrice: DISCORD_BOT_PRICE,
       description: "Custom Discord bot development for automation, moderation, community management and gaming communities with slash commands and database storage.",
       badge: "POPULAR",
       features: ["Slash Commands & Buttons", "Ticket & Verify System", "Custom Automation Logic", "24/7 Hosting Guidance"]
@@ -130,8 +137,8 @@ const SERVICE_CONFIG = {
       category: "Discord",
       icon: "fa-brands fa-discord",
       options: [
-        { label: "Standard", price: "₹500", highlight: false },
-        { label: "Premium", price: "₹100", highlight: true }
+        { label: "Standard", price: DISCORD_STANDARD_PRICE, highlight: false },
+        { label: "Premium", price: DISCORD_PREMIUM_PRICE, highlight: true }
       ],
       description: "Professional Discord server setup with organized channels, roles, permissions and community structure tailored for gaming.",
       badge: "COMMUNITY",
@@ -151,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavbarAndScroll();
   initRevealAnimations();
   initBackToTop();
+  initBackgroundMusic();
 });
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -594,4 +602,339 @@ function initBackToTop() {
       behavior: "smooth"
     });
   });
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   8. FUTURISTIC BACKGROUND MUSIC ENGINE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const MUSIC_CONFIG = {
+  audioPath: "audio/background-music.mp3",
+  defaultVolume: 0.15, // 15% Default Volume
+  fadeInDuration: 800,
+  fadeOutDuration: 600,
+  storageKeyEnabled: "mcdevhub_music_enabled",
+  storageKeyVolume: "mcdevhub_music_volume"
+};
+
+function initBackgroundMusic() {
+  const widget = document.getElementById("music-player-widget");
+  const playBtn = document.getElementById("music-play-btn");
+  const playIcon = document.getElementById("music-play-icon");
+  const muteBtn = document.getElementById("music-mute-btn");
+  const volumeIcon = document.getElementById("music-volume-icon");
+  const volumeSlider = document.getElementById("music-volume-slider");
+  const volumeText = document.getElementById("music-volume-text");
+
+  if (!widget) return;
+
+  // Retrieve saved user preferences from localStorage
+  const savedEnabled = localStorage.getItem(MUSIC_CONFIG.storageKeyEnabled);
+  const isEnabled = savedEnabled === null ? true : savedEnabled === "true";
+
+  const savedVolume = localStorage.getItem(MUSIC_CONFIG.storageKeyVolume);
+  let currentVolume = savedVolume !== null ? parseFloat(savedVolume) : MUSIC_CONFIG.defaultVolume;
+  if (isNaN(currentVolume) || currentVolume < 0 || currentVolume > 1) {
+    currentVolume = MUSIC_CONFIG.defaultVolume;
+  }
+
+  let isPlaying = false;
+  let isMuted = currentVolume === 0;
+  let previousVolume = currentVolume > 0 ? currentVolume : MUSIC_CONFIG.defaultVolume;
+  let fadeInterval = null;
+  let isUsingSynthFallback = false;
+
+  // HTML5 Audio element instance
+  const audio = new Audio();
+  audio.src = MUSIC_CONFIG.audioPath;
+  audio.loop = true;
+  audio.preload = "auto";
+  audio.volume = 0; // Starts at 0 for smooth fade-in
+
+  // Web Audio Synth Fallback (Ambient dark futuristic drone/synth pad)
+  let synthContext = null;
+  let synthGainNode = null;
+  let synthOscillators = [];
+
+  function initSynthFallback() {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+      if (!synthContext) {
+        synthContext = new AudioContext();
+      }
+
+      synthGainNode = synthContext.createGain();
+      synthGainNode.gain.setValueAtTime(0, synthContext.currentTime);
+
+      const filter = synthContext.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(520, synthContext.currentTime);
+      filter.Q.setValueAtTime(3.5, synthContext.currentTime);
+
+      // Cyber Ambient chord notes (C minor 9: C, Eb, G, Bb, D)
+      const frequencies = [65.41, 130.81, 155.56, 196.00, 233.08, 293.66];
+      synthOscillators = [];
+
+      frequencies.forEach((freq, index) => {
+        const osc = synthContext.createOscillator();
+        osc.type = index % 2 === 0 ? "sawtooth" : "sine";
+        osc.frequency.setValueAtTime(freq, synthContext.currentTime);
+
+        const lfo = synthContext.createOscillator();
+        lfo.frequency.setValueAtTime(0.08 + index * 0.025, synthContext.currentTime);
+        const lfoGain = synthContext.createGain();
+        lfoGain.gain.setValueAtTime(index % 2 === 0 ? 1.2 : 0.6, synthContext.currentTime);
+        lfo.connect(osc.frequency);
+        lfo.start();
+
+        const oscGain = synthContext.createGain();
+        oscGain.gain.setValueAtTime(0.12 / frequencies.length, synthContext.currentTime);
+
+        osc.connect(oscGain);
+        oscGain.connect(filter);
+        osc.start();
+        synthOscillators.push(osc);
+      });
+
+      filter.connect(synthGainNode);
+      synthGainNode.connect(synthContext.destination);
+    } catch (e) {
+      console.warn("Synth fallback initialized gracefully:", e);
+    }
+  }
+
+  // Handle Audio error -> Gracefully activate Web Audio Synth fallback
+  audio.addEventListener("error", () => {
+    isUsingSynthFallback = true;
+    if (isPlaying) {
+      if (!synthContext) initSynthFallback();
+      if (synthContext && synthContext.state === "suspended") {
+        synthContext.resume();
+      }
+      fadeIn(currentVolume);
+    }
+  });
+
+  // UI Updates
+  function updateUI() {
+    const displayVol = isMuted ? 0 : currentVolume;
+
+    if (volumeSlider) {
+      volumeSlider.value = displayVol;
+    }
+    if (volumeText) {
+      volumeText.textContent = `${Math.round(displayVol * 100)}%`;
+    }
+
+    // Volume icon
+    if (volumeIcon) {
+      if (isMuted || currentVolume === 0) {
+        volumeIcon.className = "fa-solid fa-volume-xmark text-red";
+      } else if (currentVolume < 0.5) {
+        volumeIcon.className = "fa-solid fa-volume-low";
+      } else {
+        volumeIcon.className = "fa-solid fa-volume-high";
+      }
+    }
+
+    // Play/Pause icon
+    if (playIcon) {
+      playIcon.className = isPlaying ? "fa-solid fa-pause" : "fa-solid fa-play";
+    }
+
+    // Equalizer animation
+    if (isPlaying) {
+      widget.classList.add("playing");
+    } else {
+      widget.classList.remove("playing");
+    }
+  }
+
+  // Smooth Fade In
+  function fadeIn(targetVolume, duration = MUSIC_CONFIG.fadeInDuration) {
+    clearInterval(fadeInterval);
+    const effectiveTarget = isMuted ? 0 : targetVolume;
+    const startTime = performance.now();
+    const startVolume = isUsingSynthFallback && synthGainNode ? synthGainNode.gain.value : audio.volume;
+
+    fadeInterval = setInterval(() => {
+      const elapsed = performance.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const vol = startVolume + (effectiveTarget - startVolume) * progress;
+
+      if (isUsingSynthFallback && synthGainNode && synthContext) {
+        synthGainNode.gain.setValueAtTime(vol, synthContext.currentTime);
+      } else {
+        audio.volume = vol;
+      }
+
+      if (progress >= 1) {
+        clearInterval(fadeInterval);
+        if (isUsingSynthFallback && synthGainNode && synthContext) {
+          synthGainNode.gain.setValueAtTime(effectiveTarget, synthContext.currentTime);
+        } else {
+          audio.volume = effectiveTarget;
+        }
+      }
+    }, 25);
+  }
+
+  // Smooth Fade Out
+  function fadeOut(duration = MUSIC_CONFIG.fadeOutDuration, callback) {
+    clearInterval(fadeInterval);
+    const startTime = performance.now();
+    const startVolume = isUsingSynthFallback && synthGainNode ? synthGainNode.gain.value : audio.volume;
+
+    fadeInterval = setInterval(() => {
+      const elapsed = performance.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const vol = startVolume * (1 - progress);
+
+      if (isUsingSynthFallback && synthGainNode && synthContext) {
+        synthGainNode.gain.setValueAtTime(vol, synthContext.currentTime);
+      } else {
+        audio.volume = vol;
+      }
+
+      if (progress >= 1) {
+        clearInterval(fadeInterval);
+        if (isUsingSynthFallback && synthGainNode && synthContext) {
+          synthGainNode.gain.setValueAtTime(0, synthContext.currentTime);
+        } else {
+          audio.volume = 0;
+        }
+        if (callback) callback();
+      }
+    }, 25);
+  }
+
+  // Play Music
+  function startPlayback() {
+    isPlaying = true;
+    localStorage.setItem(MUSIC_CONFIG.storageKeyEnabled, "true");
+    updateUI();
+
+    if (!isUsingSynthFallback) {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            fadeIn(currentVolume);
+          })
+          .catch((err) => {
+            // Autoplay blocked by browser policy -> Setup silent one-time first interaction fallback
+            isPlaying = false;
+            updateUI();
+            setupFirstInteractionFallback();
+          });
+      }
+    } else {
+      if (!synthContext) initSynthFallback();
+      if (synthContext && synthContext.state === "suspended") {
+        synthContext.resume().catch(() => {});
+      }
+      fadeIn(currentVolume);
+    }
+  }
+
+  // Pause Music
+  function pausePlayback() {
+    isPlaying = false;
+    localStorage.setItem(MUSIC_CONFIG.storageKeyEnabled, "false");
+    updateUI();
+
+    fadeOut(MUSIC_CONFIG.fadeOutDuration, () => {
+      if (!isUsingSynthFallback) {
+        audio.pause();
+      }
+    });
+  }
+
+  // One-time interaction fallback if browser blocks initial autoplay
+  let hasSetupInteractionListener = false;
+  function setupFirstInteractionFallback() {
+    if (hasSetupInteractionListener) return;
+    hasSetupInteractionListener = true;
+
+    const onFirstUserInteraction = () => {
+      const userEnabled = localStorage.getItem(MUSIC_CONFIG.storageKeyEnabled) !== "false";
+      if (userEnabled && !isPlaying) {
+        startPlayback();
+      }
+      ["click", "touchstart", "keydown", "pointerdown"].forEach(ev => {
+        document.removeEventListener(ev, onFirstUserInteraction);
+      });
+    };
+
+    ["click", "touchstart", "keydown", "pointerdown"].forEach(ev => {
+      document.addEventListener(ev, onFirstUserInteraction, { once: true, passive: true });
+    });
+  }
+
+  // Toggle Play / Pause
+  function togglePlay() {
+    if (isPlaying) {
+      pausePlayback();
+    } else {
+      isMuted = false;
+      if (currentVolume === 0) currentVolume = MUSIC_CONFIG.defaultVolume;
+      startPlayback();
+    }
+  }
+
+  // Toggle Mute / Unmute
+  function toggleMute() {
+    if (isMuted) {
+      isMuted = false;
+      currentVolume = previousVolume > 0 ? previousVolume : MUSIC_CONFIG.defaultVolume;
+      if (!isPlaying) {
+        startPlayback();
+      } else {
+        fadeIn(currentVolume);
+      }
+    } else {
+      previousVolume = currentVolume;
+      isMuted = true;
+      fadeOut(MUSIC_CONFIG.fadeOutDuration);
+    }
+    localStorage.setItem(MUSIC_CONFIG.storageKeyVolume, currentVolume.toString());
+    updateUI();
+  }
+
+  // Volume Slider Change
+  if (volumeSlider) {
+    volumeSlider.addEventListener("input", (e) => {
+      const val = parseFloat(e.target.value);
+      currentVolume = val;
+      isMuted = val === 0;
+      if (val > 0) previousVolume = val;
+
+      if (!isUsingSynthFallback) {
+        audio.volume = val;
+      } else if (synthGainNode && synthContext) {
+        synthGainNode.gain.setValueAtTime(val, synthContext.currentTime);
+      }
+
+      if (val > 0 && !isPlaying) {
+        startPlayback();
+      }
+
+      localStorage.setItem(MUSIC_CONFIG.storageKeyVolume, val.toString());
+      updateUI();
+    });
+  }
+
+  // Event Listeners
+  if (playBtn) playBtn.addEventListener("click", togglePlay);
+  if (muteBtn) muteBtn.addEventListener("click", toggleMute);
+
+  // Initialize UI state
+  updateUI();
+
+  // Attempt Autoplay on Load
+  if (isEnabled) {
+    startPlayback();
+  } else {
+    setupFirstInteractionFallback();
+  }
 }

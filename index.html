@@ -550,6 +550,36 @@
     </div>
   </footer>
 
+  <!-- Floating Background Music Controller -->
+  <div id="music-player-widget" class="music-widget" aria-label="Background Music Controller">
+    <div class="music-widget-inner">
+      <!-- Main Play/Pause Button -->
+      <button id="music-play-btn" class="music-btn music-play-btn" aria-label="Play or Pause background music" title="Play / Pause Music">
+        <i class="fa-solid fa-play" id="music-play-icon"></i>
+      </button>
+
+      <!-- Animated Equalizer Wave -->
+      <div class="music-equalizer" id="music-equalizer" title="Audio Equalizer">
+        <span class="eq-bar bar-1"></span>
+        <span class="eq-bar bar-2"></span>
+        <span class="eq-bar bar-3"></span>
+        <span class="eq-bar bar-4"></span>
+      </div>
+
+      <!-- Music Info & Volume Control -->
+      <div class="music-details">
+        <span class="music-title">AMBIENT SYNTH</span>
+        <div class="music-volume-wrap">
+          <button id="music-mute-btn" class="music-mute-btn" aria-label="Mute or Unmute Music" title="Mute / Unmute">
+            <i class="fa-solid fa-volume-high" id="music-volume-icon"></i>
+          </button>
+          <input type="range" id="music-volume-slider" class="music-volume-slider" min="0" max="1" step="0.01" value="0.15" aria-label="Music Volume" title="Volume Slider">
+          <span id="music-volume-text" class="music-volume-percent">15%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Floating Scroll To Top Button -->
   <button id="back-to-top" class="back-to-top" aria-label="Scroll to top">
     <i class="fa-solid fa-arrow-up"></i>
