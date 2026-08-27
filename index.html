@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCDeveloperHub | Professional Website, Minecraft & Discord Development</title>
+  <meta name="description" content="MCDeveloperHub - Premium Minecraft server systems, custom web development, professional Discord servers, and Discord bots for gaming communities and creators.">
+  <meta name="theme-color" content="#ff2247">
+  
+  <!-- Google Fonts: Space Grotesk & Orbitron & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 1. LOADING SCREEN -->
+  <div id="loading-screen" class="loading-screen" aria-hidden="false">
+    <div class="loader-content">
+      <div class="loader-logo-wrap">
+        <div class="loader-cube-glow"></div>
+        <div class="loader-cube">
+          <i class="fa-solid fa-cube"></i>
+        </div>
+      </div>
+      <div class="loader-brand">MC<span>DEVELOPER</span>HUB</div>
+      <div class="loader-bar-bg">
+        <div class="loader-bar-fill" id="loader-bar"></div>
+      </div>
+      <div class="loader-status">INITIALIZING SYSTEMS... <span id="loader-percent">0%</span></div>
+    </div>
+  </div>
+
+  <!-- BACKGROUND CANVAS & GRID -->
+  <div class="bg-effects">
+    <canvas id="particle-canvas"></canvas>
+    <div class="cyber-grid"></div>
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+  </div>
+
+  <!-- 2. NAVBAR -->
+  <header class="header" id="navbar">
+    <nav class="nav-container">
+      <a href="#home" class="nav-brand">
+        <div class="nav-logo-box">
+          <i class="fa-solid fa-cube nav-logo-icon"></i>
+          <div class="nav-logo-glow"></div>
+        </div>
+        <div class="nav-brand-text">
+          <span class="brand-mc">MC</span><span class="brand-dev">DEVELOPER</span><span class="brand-hub">HUB</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#home" class="nav-link active" data-nav="home">
+              <i class="fa-solid fa-house-chimney"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#website-services" class="nav-link" data-nav="website">
+              <i class="fa-solid fa-globe"></i> Website
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#minecraft-services" class="nav-link" data-nav="minecraft">
+              <i class="fa-solid fa-cubes"></i> Minecraft
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#discord-services" class="nav-link" data-nav="discord">
+              <i class="fa-brands fa-discord"></i> Discord
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#why-us" class="nav-link" data-nav="why-us">
+              <i class="fa-solid fa-shield-halved"></i> Why Us
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link" data-nav="contact">
+              <i class="fa-solid fa-envelope"></i> Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="nav-actions">
+        <a href="https://discord.gg/qsdzKXdFDk" target="_blank" rel="noopener noreferrer" class="btn btn-nav-discord">
+          <i class="fa-brands fa-discord"></i>
+          <span>Join Discord</span>
+          <span class="pulse-dot"></span>
+        </a>
+        
+        <!-- Mobile Hamburger -->
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="toggle-bar bar-1"></span>
+          <span class="toggle-bar bar-2"></span>
+          <span class="toggle-bar bar-3"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="main-content">
+
+    <!-- 3. HERO SECTION -->
+    <section class="hero-section" id="home">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="hero-badge reveal-fade">
+            <span class="badge-dot"></span>
+            <span class="badge-text">⚡ PREMIUM GAMING & DEV AGENCY</span>
+          </div>
+
+          <h1 class="hero-title reveal-fade">
+            <span class="text-white">MC</span><span class="text-gradient-red">DEVELOPER</span><span class="text-red">HUB</span>
+          </h1>
+
+          <p class="hero-subtitle reveal-fade">
+            Professional Website, Minecraft & Discord Development
+          </p>
+
+          <div class="hero-tagline reveal-fade">
+            <span class="tagline-word">BUILD.</span>
+            <span class="tagline-divider">/</span>
+            <span class="tagline-word">CREATE.</span>
+            <span class="tagline-divider">/</span>
+            <span class="tagline-word highlight">DEVELOP.</span>
+          </div>
+
+          <p class="hero-desc reveal-fade">
+            We build modern websites, powerful Minecraft server systems, professional Discord servers and custom Discord bots for gaming communities and creators.
+          </p>
+
+          <div class="hero-buttons reveal-fade">
+            <a href="#service-categories" class="btn btn-primary btn-glow">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Explore Services</span>
+            </a>
+            <a href="https://discord.gg/qsdzKXdFDk" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <i class="fa-brands fa-discord"></i>
+              <span>Join Discord</span>
+            </a>
+          </div>
+
+          <!-- Quick Stats / Highlights -->
+          <div class="hero-stats reveal-fade">
+            <div class="stat-card">
+              <div class="stat-num">100%</div>
+              <div class="stat-lbl">Custom Work</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <div class="stat-num">24/7</div>
+              <div class="stat-lbl">Ticket Support</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <div class="stat-num">Fast</div>
+              <div class="stat-lbl">Turnaround</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO 3D FLOATING & ROTATING LOGO -->
+        <div class="hero-visual reveal-scale">
+          <div class="logo-3d-scene" id="logo-scene">
+            <div class="cyber-ring-outer"></div>
+            <div class="cyber-ring-inner"></div>
+            
+            <div class="floating-logo-card" id="floating-logo">
+              <div class="logo-glow-aura"></div>
+              
+              <!-- 3D Logo Cube & Graphics -->
+              <div class="logo-front">
+                <div class="cube-container">
+                  <div class="cube-shadow"></div>
+                  <div class="tech-cube">
+                    <div class="cube-face face-front"><i class="fa-solid fa-cube"></i></div>
+                    <div class="cube-face face-back"><i class="fa-brands fa-discord"></i></div>
+                    <div class="cube-face face-right"><i class="fa-solid fa-code"></i></div>
+                    <div class="cube-face face-left"><i class="fa-solid fa-server"></i></div>
+                    <div class="cube-face face-top"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="cube-face face-bottom"><i class="fa-solid fa-shield"></i></div>
+                  </div>
+                </div>
+
+                <div class="floating-logo-text">
+                  <div class="fl-brand-title">MC DEVELOPER</div>
+                  <div class="fl-brand-accent">HUB</div>
+                  <div class="fl-brand-sub">FOR MINECRAFT, WEBSITE & DISCORD</div>
+                </div>
+              </div>
+
+              <!-- Interactive Badge Overlay -->
+              <div class="badge-floating-corner">
+                <span class="live-status-dot"></span>
+                <span>ONLINE</span>
+              </div>
+            </div>
+
+            <!-- Orbiting Cyber Particles -->
+            <div class="orbit-particle orbit-1"></div>
+            <div class="orbit-particle orbit-2"></div>
+            <div class="orbit-particle orbit-3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SERVICE CATEGORIES (Large Highlights) -->
+    <section class="section-categories" id="service-categories">
+      <div class="container">
+        <div class="section-header reveal-fade">
+          <div class="section-badge">CORE CAPABILITIES</div>
+          <h2 class="section-title">Service <span class="text-red">Categories</span></h2>
+          <p class="section-subtitle">Select a category to explore our tailored packages and custom development solutions</p>
+        </div>
+
+        <div class="categories-grid">
+          <!-- Category 1: Website -->
+          <a href="#website-services" class="category-card reveal-up">
+            <div class="cat-card-bg"></div>
+            <div class="cat-card-glow"></div>
+            <div class="cat-icon-wrapper">
+              <div class="cat-icon cat-icon-web">
+                <i class="fa-solid fa-globe"></i>
+              </div>
+              <span class="cat-chip">Web Agency</span>
+            </div>
+            <h3 class="cat-title">🌐 WEBSITE</h3>
+            <p class="cat-desc">Professional modern websites, hosting landing pages, server portals, and custom web development.</p>
+            <div class="cat-action">
+              <span>View Packages</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </a>
+
+          <!-- Category 2: Minecraft -->
+          <a href="#minecraft-services" class="category-card reveal-up" style="animation-delay: 0.15s;">
+            <div class="cat-card-bg"></div>
+            <div class="cat-card-glow"></div>
+            <div class="cat-icon-wrapper">
+              <div class="cat-icon cat-icon-mc">
+                <i class="fa-solid fa-cubes"></i>
+              </div>
+              <span class="cat-chip">Server Setup</span>
+            </div>
+            <h3 class="cat-title">⛏️ MINECRAFT</h3>
+            <p class="cat-desc">Minecraft server setup, proxy & lobby architectures, survival, lifesteal, and enterprise network setups.</p>
+            <div class="cat-action">
+              <span>View Packages</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </a>
+
+          <!-- Category 3: Discord -->
+          <a href="#discord-services" class="category-card reveal-up" style="animation-delay: 0.3s;">
+            <div class="cat-card-bg"></div>
+            <div class="cat-card-glow"></div>
+            <div class="cat-icon-wrapper">
+              <div class="cat-icon cat-icon-dc">
+                <i class="fa-brands fa-discord"></i>
+              </div>
+              <span class="cat-chip">Bots & Servers</span>
+            </div>
+            <h3 class="cat-title">💬 DISCORD</h3>
+            <p class="cat-desc">Discord servers, custom Discord bot development, automated role management, ticket systems, and moderation.</p>
+            <div class="cat-action">
+              <span>View Packages</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. WEBSITE SERVICES -->
+    <section class="section-services" id="website-services">
+      <div class="container">
+        <div class="section-header reveal-fade">
+          <div class="section-badge"><i class="fa-solid fa-globe"></i> WEB DEVELOPMENT</div>
+          <h2 class="section-title">Website <span class="text-red">Services</span></h2>
+          <p class="section-subtitle">High-speed, SEO optimized, fully responsive web solutions for gaming networks and brands</p>
+        </div>
+
+        <div class="services-grid" id="website-services-container">
+          <!-- Dynamically populated from JS SERVICE PRICES configuration -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. MINECRAFT SERVICES -->
+    <section class="section-services" id="minecraft-services">
+      <div class="container">
+        <div class="section-header reveal-fade">
+          <div class="section-badge"><i class="fa-solid fa-cubes"></i> SERVER SYSTEMS</div>
+          <h2 class="section-title">Minecraft <span class="text-red">Services</span></h2>
+          <p class="section-subtitle">Rock-solid infrastructure, optimized configurations, anti-cheat, and custom gameplay engines</p>
+        </div>
+
+        <div class="services-grid" id="minecraft-services-container">
+          <!-- Dynamically populated from JS SERVICE PRICES configuration -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. DISCORD SERVICES -->
+    <section class="section-services" id="discord-services">
+      <div class="container">
+        <div class="section-header reveal-fade">
+          <div class="section-badge"><i class="fa-brands fa-discord"></i> COMMUNITY & AUTOMATION</div>
+          <h2 class="section-title">Discord <span class="text-red">Services</span></h2>
+          <p class="section-subtitle">Custom bot development, permission security audits, role hierarchies, and automated ticket workflows</p>
+        </div>
+
+        <div class="services-grid" id="discord-services-container">
+          <!-- Dynamically populated from JS SERVICE PRICES configuration -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. WHY CHOOSE MCDEVELOPERHUB -->
+    <section class="section-why-us" id="why-us">
+      <div class="container">
+        <div class="section-header reveal-fade">
+          <div class="section-badge"><i class="fa-solid fa-award"></i> WHY US</div>
+          <h2 class="section-title">Why Choose <span class="text-red">MCDeveloperHub</span></h2>
+          <p class="section-subtitle">Built by developers who understand gaming networks, uptime demands, and community growth</p>
+        </div>
+
+        <div class="why-us-grid">
+          <!-- Card 1 -->
+          <div class="why-card reveal-up">
+            <div class="why-card-glow"></div>
+            <div class="why-icon-box">
+              <i class="fa-solid fa-bolt-lightning"></i>
+            </div>
+            <h3 class="why-title">⚡ Fast Development</h3>
+            <p class="why-desc">We prioritize quick turnaround times with rigorous QA testing so your server or website goes live without delays.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="why-card reveal-up" style="animation-delay: 0.1s;">
+            <div class="why-card-glow"></div>
+            <div class="why-icon-box">
+              <i class="fa-solid fa-rocket"></i>
+            </div>
+            <h3 class="why-title">🚀 Modern Technology</h3>
+            <p class="why-desc">Using cutting-edge software stacks, lightweight architectures, and optimized server configurations for peak performance.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="why-card reveal-up" style="animation-delay: 0.2s;">
+            <div class="why-card-glow"></div>
+            <div class="why-icon-box">
+              <i class="fa-solid fa-palette"></i>
+            </div>
+            <h3 class="why-title">🎨 Premium Design</h3>
+            <p class="why-desc">Tailored high-impact visual aesthetics, intuitive user interfaces, and custom branding that make your community stand out.</p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="why-card reveal-up" style="animation-delay: 0.3s;">
+            <div class="why-card-glow"></div>
+            <div class="why-icon-box">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+            <h3 class="why-title">🛠️ Custom Solutions</h3>
+            <p class="why-desc">Every gaming community has unique requirements. We craft personalized setups tailored exactly to your vision.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CONTACT / ORDER SECTION (Large CTA) -->
+    <section class="section-contact" id="contact">
+      <div class="container">
+        <div class="cta-banner reveal-scale">
+          <div class="cta-mesh-bg"></div>
+          <div class="cta-content">
+            <div class="cta-badge">GET STARTED TODAY</div>
+            <h2 class="cta-heading">Ready to Build <span class="text-red">Something Amazing?</span></h2>
+            <p class="cta-text">
+              Have a project in mind? Contact MCDeveloperHub and let's build it together. Open a Discord ticket for instant quotes or email us directly.
+            </p>
+
+            <div class="cta-buttons">
+              <a href="https://discord.gg/qsdzKXdFDk" target="_blank" rel="noopener noreferrer" class="btn btn-cta-discord btn-glow">
+                <i class="fa-brands fa-discord"></i>
+                <span>Create Discord Ticket</span>
+              </a>
+              <a href="mailto:McDevloperHub@gmail.com" class="btn btn-cta-email">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Email Us</span>
+              </a>
+            </div>
+
+            <!-- Direct Contact Info Strip -->
+            <div class="cta-direct-info">
+              <div class="info-item">
+                <i class="fa-solid fa-at"></i>
+                <span>Email: <strong>McDevloperHub@gmail.com</strong></span>
+              </div>
+              <div class="info-divider"></div>
+              <div class="info-item">
+                <i class="fa-brands fa-discord"></i>
+                <span>Discord: <strong>discord.gg/qsdzKXdFDk</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. SOCIAL MEDIA SECTION -->
+    <section class="section-socials" id="socials">
+      <div class="container">
+        <div class="section-header reveal-fade">
+          <div class="section-badge"><i class="fa-solid fa-share-nodes"></i> CONNECT WITH US</div>
+          <h2 class="section-title">Join Our <span class="text-red">Community</span></h2>
+          <p class="section-subtitle">Follow our updates, tutorials, showcases, and development streams across all platforms</p>
+        </div>
+
+        <div class="socials-grid">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/developer.terror?igsi=ZnM3NHNtdjF3dmpr" target="_blank" rel="noopener noreferrer" class="social-card sc-instagram reveal-up">
+            <div class="sc-glow"></div>
+            <div class="sc-icon"><i class="fa-brands fa-instagram"></i></div>
+            <div class="sc-info">
+              <div class="sc-platform">Instagram</div>
+              <div class="sc-handle">@developer.terror</div>
+              <div class="sc-label">Follow for updates & reels</div>
+            </div>
+            <div class="sc-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+          </a>
+
+          <!-- YouTube -->
+          <a href="https://youtube.com/@terror1943?si=mjXOVW4TZnGoXd26" target="_blank" rel="noopener noreferrer" class="social-card sc-youtube reveal-up" style="animation-delay: 0.1s;">
+            <div class="sc-glow"></div>
+            <div class="sc-icon"><i class="fa-brands fa-youtube"></i></div>
+            <div class="sc-info">
+              <div class="sc-platform">YouTube</div>
+              <div class="sc-handle">@terror1943</div>
+              <div class="sc-label">Watch tutorials & showcases</div>
+            </div>
+            <div class="sc-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+          </a>
+
+          <!-- Discord -->
+          <a href="https://discord.gg/qsdzKXdFDk" target="_blank" rel="noopener noreferrer" class="social-card sc-discord reveal-up" style="animation-delay: 0.2s;">
+            <div class="sc-glow"></div>
+            <div class="sc-icon"><i class="fa-brands fa-discord"></i></div>
+            <div class="sc-info">
+              <div class="sc-platform">Discord</div>
+              <div class="sc-handle">MCDeveloperHub</div>
+              <div class="sc-label">Order tickets & live community</div>
+            </div>
+            <div class="sc-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+          </a>
+
+          <!-- Email -->
+          <a href="mailto:McDevloperHub@gmail.com" class="social-card sc-email reveal-up" style="animation-delay: 0.3s;">
+            <div class="sc-glow"></div>
+            <div class="sc-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="sc-info">
+              <div class="sc-platform">Email</div>
+              <div class="sc-handle">McDevloperHub@gmail.com</div>
+              <div class="sc-label">Business inquiries & quotes</div>
+            </div>
+            <div class="sc-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 11. FOOTER -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <div class="footer-brand">
+            <i class="fa-solid fa-cube text-red"></i>
+            <span>MC<strong class="text-red">DEVELOPER</strong>HUB</span>
+          </div>
+          <p class="footer-tagline">Website • Minecraft • Discord Development</p>
+          <p class="footer-about">
+            Delivering high-performance Minecraft servers, custom Discord bots, and modern web applications for gaming communities worldwide.
+          </p>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+            <li><a href="#website-services"><i class="fa-solid fa-angle-right"></i> Website</a></li>
+            <li><a href="#minecraft-services"><i class="fa-solid fa-angle-right"></i> Minecraft</a></li>
+            <li><a href="#discord-services"><i class="fa-solid fa-angle-right"></i> Discord</a></li>
+            <li><a href="#why-us"><i class="fa-solid fa-angle-right"></i> Why Us</a></li>
+            <li><a href="#contact"><i class="fa-solid fa-angle-right"></i> Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact-col">
+          <h4 class="footer-heading">Direct Contact</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-solid fa-envelope text-red"></i>
+              <a href="mailto:McDevloperHub@gmail.com">McDevloperHub@gmail.com</a>
+            </li>
+            <li>
+              <i class="fa-brands fa-discord text-red"></i>
+              <a href="https://discord.gg/qsdzKXdFDk" target="_blank" rel="noopener noreferrer">discord.gg/qsdzKXdFDk</a>
+            </li>
+            <li>
+              <i class="fa-brands fa-instagram text-red"></i>
+              <a href="https://www.instagram.com/developer.terror?igsi=ZnM3NHNtdjF3dmpr" target="_blank" rel="noopener noreferrer">@developer.terror</a>
+            </li>
+            <li>
+              <i class="fa-brands fa-youtube text-red"></i>
+              <a href="https://youtube.com/@terror1943?si=mjXOVW4TZnGoXd26" target="_blank" rel="noopener noreferrer">@terror1943</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="copyright">
+          &copy; 2026 MCDeveloperHub. All Rights Reserved.
+        </div>
+        <div class="footer-sub-tag">
+          Designed with <span class="heart-pulse">❤</span> for the Gaming & Creator Community
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Scroll To Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Scroll to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>

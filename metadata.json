@@ -1,0 +1,6 @@
+{
+  "name": "MCDeveloperHub",
+  "description": "Professional Website, Minecraft & Discord Development agency platform with interactive 3D floating rotating logo and full service catalog.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
