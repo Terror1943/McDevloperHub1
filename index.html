@@ -97,6 +97,56 @@
 
       <!-- Action Buttons -->
       <div class="nav-actions">
+        <!-- Auth Profile / Login Button -->
+        <div id="nav-auth-container" class="nav-auth-container">
+          <button id="btn-open-login" class="btn btn-nav-auth" aria-label="Login or Sign Up">
+            <i class="fa-solid fa-user-lock"></i>
+            <span>Sign In</span>
+          </button>
+          
+          <div id="nav-user-dropdown" class="nav-user-dropdown" style="display: none;">
+            <button id="btn-user-profile-toggle" class="user-profile-badge" aria-label="Open User Menu">
+              <div class="user-avatar-wrapper">
+                <img id="user-nav-avatar" src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="user-nav-avatar">
+                <span class="user-status-dot"></span>
+              </div>
+              <span id="user-nav-name" class="user-nav-name">Gamer</span>
+              <i class="fa-solid fa-chevron-down profile-caret"></i>
+            </button>
+
+            <!-- Dropdown Popover -->
+            <div id="user-menu-popover" class="user-menu-popover">
+              <div class="user-menu-header">
+                <div class="user-menu-avatar-wrap">
+                  <img id="menu-user-avatar" src="" alt="Avatar" class="user-menu-avatar">
+                  <span id="menu-provider-badge" class="menu-provider-badge"><i class="fa-brands fa-google"></i></span>
+                </div>
+                <div class="user-menu-info">
+                  <div id="menu-user-name" class="menu-user-name">Gamer</div>
+                  <div id="menu-user-email" class="menu-user-email">gamer@gmail.com</div>
+                  <div class="menu-user-badge"><span class="badge-role">VERIFIED MEMBER</span></div>
+                </div>
+              </div>
+              <div class="user-menu-divider"></div>
+              <div class="user-menu-items">
+                <button class="user-menu-item" id="btn-menu-account">
+                  <i class="fa-solid fa-id-card"></i> <span>My Account & Discord</span>
+                </button>
+                <a href="#discord-services" class="user-menu-item" id="btn-menu-services">
+                  <i class="fa-solid fa-cubes"></i> <span>Explore Services</span>
+                </a>
+                <a href="https://discord.gg/qsdzKXdFDk" target="_blank" rel="noopener noreferrer" class="user-menu-item">
+                  <i class="fa-brands fa-discord text-blurple"></i> <span>Discord Support Hub</span>
+                </a>
+              </div>
+              <div class="user-menu-divider"></div>
+              <button class="user-menu-item user-logout-item" id="btn-user-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
         <a href="https://discord.gg/qsdzKXdFDk" target="_blank" rel="noopener noreferrer" class="btn btn-nav-discord">
           <i class="fa-brands fa-discord"></i>
           <span>Join Discord</span>
@@ -584,6 +634,377 @@
   <button id="back-to-top" class="back-to-top" aria-label="Scroll to top">
     <i class="fa-solid fa-arrow-up"></i>
   </button>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       AUTH MODAL (LOGIN & SIGN UP WITH GOOGLE, DISCORD, GMAIL)
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div id="auth-modal" class="auth-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="auth-modal-card">
+      <!-- Glow Borders & Accents -->
+      <div class="auth-modal-glow"></div>
+      
+      <!-- Close Button -->
+      <button class="auth-modal-close" id="btn-close-auth-modal" aria-label="Close Authentication Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="auth-header">
+        <div class="auth-logo-badge">
+          <i class="fa-solid fa-cube"></i>
+        </div>
+        <h2 class="auth-title">MC<span class="text-red">DEVELOPER</span>HUB</h2>
+        <p class="auth-subtitle">Access your client portal, custom orders & support tickets</p>
+      </div>
+
+      <!-- Auth Switcher Tabs -->
+      <div class="auth-tabs" id="auth-main-tabs">
+        <button class="auth-tab-btn active" id="tab-btn-signin" data-tab="signin">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        </button>
+        <button class="auth-tab-btn" id="tab-btn-signup" data-tab="signup">
+          <i class="fa-solid fa-user-plus"></i> Create Account
+        </button>
+      </div>
+
+      <!-- Forgot Password Mode Header (Hidden by default) -->
+      <div id="auth-forgot-header" class="auth-forgot-header" style="display: none;">
+        <button type="button" id="btn-forgot-back-nav" class="btn-forgot-back" aria-label="Back to Sign In">
+          <i class="fa-solid fa-arrow-left"></i> <span>Back to Sign In</span>
+        </button>
+        <div class="forgot-header-badge">
+          <i class="fa-solid fa-key text-red"></i> <span>Account Recovery</span>
+        </div>
+      </div>
+
+      <!-- Alert / Status Notice -->
+      <div id="auth-alert" class="auth-alert" style="display: none;">
+        <i class="fa-solid fa-circle-info" id="auth-alert-icon"></i>
+        <span id="auth-alert-text">Status message</span>
+      </div>
+
+      <!-- 1-CLICK SOCIAL LOGIN PROVIDERS -->
+      <div class="social-auth-grid" id="social-auth-container">
+        <!-- Google Sign-In Button -->
+        <button class="social-auth-btn btn-google-auth" id="btn-auth-google" title="Continue with Google">
+          <svg class="google-svg" viewBox="0 0 48 48" width="20" height="20">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          <span>Continue with Google</span>
+        </button>
+
+        <!-- Discord Sign-In Button -->
+        <button class="social-auth-btn btn-discord-auth" id="btn-auth-discord" title="Continue with Discord">
+          <i class="fa-brands fa-discord"></i>
+          <span>Continue with Discord</span>
+        </button>
+      </div>
+
+      <div class="auth-divider" id="social-auth-divider">
+        <span>OR WITH GMAIL / EMAIL</span>
+      </div>
+
+      <!-- SIGN IN FORM -->
+      <form id="form-signin" class="auth-form active">
+        <div class="form-group">
+          <label for="signin-email" class="form-label">
+            <i class="fa-solid fa-envelope"></i> Email or Gmail
+          </label>
+          <div class="input-with-icon">
+            <input type="email" id="signin-email" class="auth-input" placeholder="e.g. name@gmail.com" required autocomplete="email">
+            <i class="fa-solid fa-at input-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label for="signin-password" class="form-label">
+              <i class="fa-solid fa-lock"></i> Password
+            </label>
+            <a href="#" id="btn-forgot-password" class="forgot-link">Forgot?</a>
+          </div>
+          <div class="input-with-icon">
+            <input type="password" id="signin-password" class="auth-input" placeholder="••••••••" required autocomplete="current-password">
+            <button type="button" class="btn-toggle-pw" aria-label="Toggle password visibility" data-target="signin-password">
+              <i class="fa-solid fa-eye-slash"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox" id="signin-remember" checked>
+            <span class="custom-check"></span>
+            <span>Remember my session</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-auth-submit" id="btn-submit-signin">
+          <span>Sign In to Dashboard</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <!-- SIGN UP FORM -->
+      <form id="form-signup" class="auth-form">
+        <div class="form-group">
+          <label for="signup-name" class="form-label">
+            <i class="fa-solid fa-user"></i> Full Name / Minecraft Tag
+          </label>
+          <div class="input-with-icon">
+            <input type="text" id="signup-name" class="auth-input" placeholder="e.g. Alex (AlexDev_MC)" required autocomplete="name">
+            <i class="fa-solid fa-gamepad input-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="signup-email" class="form-label">
+            <i class="fa-solid fa-envelope"></i> Email or Gmail
+          </label>
+          <div class="input-with-icon">
+            <input type="email" id="signup-email" class="auth-input" placeholder="e.g. client@gmail.com" required autocomplete="email">
+            <i class="fa-solid fa-at input-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="signup-discord" class="form-label">
+            <i class="fa-brands fa-discord"></i> Discord Username (Optional)
+          </label>
+          <div class="input-with-icon">
+            <input type="text" id="signup-discord" class="auth-input" placeholder="e.g. user_mc #0000">
+            <i class="fa-brands fa-discord input-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="signup-password" class="form-label">
+              <i class="fa-solid fa-lock"></i> Password
+            </label>
+            <div class="input-with-icon">
+              <input type="password" id="signup-password" class="auth-input" placeholder="Min 6 chars" required autocomplete="new-password" minlength="6">
+              <button type="button" class="btn-toggle-pw" aria-label="Toggle password visibility" data-target="signup-password">
+                <i class="fa-solid fa-eye-slash"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-confirm-password" class="form-label">
+              <i class="fa-solid fa-shield"></i> Confirm
+            </label>
+            <div class="input-with-icon">
+              <input type="password" id="signup-confirm-password" class="auth-input" placeholder="Re-enter" required autocomplete="new-password" minlength="6">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox" id="signup-terms" required checked>
+            <span class="custom-check"></span>
+            <span>I agree to the <a href="https://discord.gg/qsdzKXdFDk" target="_blank" class="terms-link">Community Terms</a></span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-auth-submit" id="btn-submit-signup">
+          <span>Create My Account</span>
+          <i class="fa-solid fa-user-check"></i>
+        </button>
+      </form>
+
+      <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           FORGOT PASSWORD: STEP 1 - REQUEST VERIFICATION CODE
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+      <form id="form-forgot-request" class="auth-form">
+        <div class="forgot-intro-box">
+          <p class="forgot-intro-text">
+            Enter your registered Gmail or email address. We'll generate a time-limited 6-digit verification security token to verify your identity.
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label for="forgot-email-input" class="form-label">
+            <i class="fa-solid fa-envelope"></i> Email or Gmail
+          </label>
+          <div class="input-with-icon">
+            <input type="email" id="forgot-email-input" class="auth-input" placeholder="e.g. name@gmail.com" required autocomplete="email">
+            <i class="fa-solid fa-at input-icon"></i>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-auth-submit" id="btn-submit-forgot-request">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Send Verification Token</span>
+        </button>
+
+        <button type="button" class="btn-auth-text-link" id="btn-forgot-to-signin">
+          <i class="fa-solid fa-arrow-left"></i> Remember password? Sign In
+        </button>
+      </form>
+
+      <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           FORGOT PASSWORD: STEP 2 - VERIFY TOKEN & RESET
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+      <form id="form-forgot-verify" class="auth-form">
+        <div class="token-banner-box">
+          <div class="token-banner-top">
+            <span class="token-target-badge"><i class="fa-solid fa-shield-halved"></i> Security Verification</span>
+            <div class="token-countdown-wrap">
+              <i class="fa-solid fa-stopwatch text-red"></i>
+              <span id="token-countdown-timer">10:00</span>
+            </div>
+          </div>
+          <p class="token-banner-sub">
+            A 6-digit reset token was generated for <span id="token-email-display" class="highlight-email">user@gmail.com</span>
+          </p>
+          
+          <!-- Cyber Simulated Email Notification Preview Box -->
+          <div class="simulated-email-box" id="simulated-token-box">
+            <div class="simulated-email-header">
+              <span class="sim-badge"><i class="fa-solid fa-envelope-circle-check"></i> SIMULATED DISPATCH</span>
+              <button type="button" id="btn-autofill-token" class="btn-autofill-token">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Auto-fill Code
+              </button>
+            </div>
+            <div class="simulated-token-display">
+              <span class="token-prefix">MCDH-</span><span id="simulated-token-code" class="token-code-digits">------</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="forgot-token-code" class="form-label">
+            <i class="fa-solid fa-key"></i> 6-Digit Verification Token
+          </label>
+          <div class="input-with-icon">
+            <input type="text" id="forgot-token-code" class="auth-input token-input-field" placeholder="123456" maxlength="6" pattern="[0-9]{6}" inputmode="numeric" required autocomplete="one-time-code">
+            <i class="fa-solid fa-shield-virus input-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="forgot-new-password" class="form-label">
+            <i class="fa-solid fa-lock"></i> New Password
+          </label>
+          <div class="input-with-icon">
+            <input type="password" id="forgot-new-password" class="auth-input" placeholder="Min 6 characters" required autocomplete="new-password" minlength="6">
+            <button type="button" class="btn-toggle-pw" aria-label="Toggle password visibility" data-target="forgot-new-password">
+              <i class="fa-solid fa-eye-slash"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="forgot-confirm-password" class="form-label">
+            <i class="fa-solid fa-lock-open"></i> Confirm New Password
+          </label>
+          <div class="input-with-icon">
+            <input type="password" id="forgot-confirm-password" class="auth-input" placeholder="Re-enter new password" required autocomplete="new-password" minlength="6">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-auth-submit" id="btn-submit-forgot-verify">
+          <i class="fa-solid fa-check-double"></i>
+          <span>Verify Token & Save Password</span>
+        </button>
+
+        <div class="token-footer-actions">
+          <button type="button" class="btn-token-resend" id="btn-resend-token">
+            <i class="fa-solid fa-rotate-right"></i> <span>Resend Code</span>
+          </button>
+          <button type="button" class="btn-auth-text-link" id="btn-cancel-reset">
+            Cancel
+          </button>
+        </div>
+      </form>
+
+      <!-- Security Guarantee Footer -->
+      <div class="auth-footer-notes">
+        <i class="fa-solid fa-lock text-red"></i> 256-Bit Encrypted & Protected Session
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       USER ACCOUNT DASHBOARD MODAL
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div id="account-modal" class="auth-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="auth-modal-card account-modal-card">
+      <button class="auth-modal-close" id="btn-close-account-modal" aria-label="Close Account Details">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="account-card-header">
+        <div class="account-profile-box">
+          <div class="account-avatar-ring">
+            <img id="acc-modal-avatar" src="" alt="User Avatar" class="acc-modal-avatar">
+            <span id="acc-modal-provider-icon" class="acc-provider-icon"><i class="fa-brands fa-google"></i></span>
+          </div>
+          <div class="account-header-text">
+            <h3 id="acc-modal-name" class="acc-name">User Name</h3>
+            <p id="acc-modal-email" class="acc-email">user@gmail.com</p>
+            <div class="acc-badges">
+              <span class="badge-role" id="acc-modal-badge">CLIENT MEMBER</span>
+              <span class="badge-active"><i class="fa-solid fa-circle"></i> ACTIVE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="account-details-grid">
+        <div class="acc-info-card">
+          <div class="acc-info-icon"><i class="fa-solid fa-fingerprint"></i></div>
+          <div class="acc-info-content">
+            <span class="acc-info-label">CLIENT ID</span>
+            <span class="acc-info-val" id="acc-modal-id">MCDH-9921</span>
+          </div>
+        </div>
+
+        <div class="acc-info-card">
+          <div class="acc-info-icon"><i class="fa-brands fa-discord text-blurple"></i></div>
+          <div class="acc-info-content">
+            <span class="acc-info-label">DISCORD SYNC</span>
+            <span class="acc-info-val text-green" id="acc-modal-discord">Linked / Ready</span>
+          </div>
+        </div>
+
+        <div class="acc-info-card">
+          <div class="acc-info-icon"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="acc-info-content">
+            <span class="acc-info-label">MEMBER SINCE</span>
+            <span class="acc-info-val" id="acc-modal-joined">Aug 2026</span>
+          </div>
+        </div>
+
+        <div class="acc-info-card">
+          <div class="acc-info-icon"><i class="fa-solid fa-shield-halved text-red"></i></div>
+          <div class="acc-info-content">
+            <span class="acc-info-label">SECURITY</span>
+            <span class="acc-info-val text-green">Verified</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="account-actions-box">
+        <a href="https://discord.gg/qsdzKXdFDk" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">
+          <i class="fa-brands fa-discord"></i>
+          <span>Open Discord Order Ticket</span>
+        </a>
+        <button id="btn-modal-logout" class="btn btn-secondary btn-block">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Sign Out from Account</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING NOTIFICATION TOASTS -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
   <!-- Main JavaScript File -->
   <script src="script.js"></script>
